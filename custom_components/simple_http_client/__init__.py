@@ -1,18 +1,18 @@
 """Simple HTTP Client integration for Home Assistant."""
+from __future__ import annotations
+
 import logging
 import aiohttp
 import voluptuous as vol
 
+from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse, SupportsResponse
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
+from .const import DOMAIN
+
 _LOGGER = logging.getLogger(__name__)
-
-DOMAIN = "simple_http_client"
-
-# This integration has no configuration parameters
-CONFIG_SCHEMA = cv.empty_config_schema(DOMAIN)
 
 # Service schema
 SERVICE_FETCH_SCHEMA = vol.Schema({
@@ -24,8 +24,8 @@ SERVICE_FETCH_SCHEMA = vol.Schema({
 })
 
 
-async def async_setup(hass: HomeAssistant, config: dict) -> bool:
-    """Set up the Simple HTTP Client component."""
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Set up Simple HTTP Client from a config entry."""
 
     async def async_handle_fetch(call: ServiceCall) -> ServiceResponse:
         """Handle the fetch service call."""
@@ -95,5 +95,15 @@ async def async_setup(hass: HomeAssistant, config: dict) -> bool:
     )
 
     _LOGGER.info("Simple HTTP Client integration loaded successfully")
+
+    return True
+
+
+async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Unload a config entry."""
+    # Remove the service
+    hass.services.async_remove(DOMAIN, "fetch")
+
+    _LOGGER.info("Simple HTTP Client integration unloaded successfully")
 
     return True

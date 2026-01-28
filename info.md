@@ -7,22 +7,23 @@
 > **If you're upgrading from version v1.0.0:**
 >
 > **For HACS users:**
-> 1. In `configuration.yaml`: remove `simple_curl:`
+> 1. Remove from `configuration.yaml`: `simple_curl:` (if present)
 > 2. Restart Home Assistant to disable the old integration
 > 3. In HACS → Integrations, find "Simple cURL" and remove it
-> 4. Remove old repo repository: `https://github.com/storm1er/ha-simple-curl`
-> 4. Add repository: `https://github.com/storm1er/ha-simple-http-client`
-> 5. Download "Simple HTTP Client"
-> 6. In `configuration.yaml`: add `simple_http_client:`
+> 4. Remove old repository: `https://github.com/storm1er/ha-simple-curl`
+> 5. Add repository: `https://github.com/storm1er/ha-simple-http-client`
+> 6. Download "Simple HTTP Client"
 > 7. Restart Home Assistant
-> 8. Update all service calls: `simple_curl.fetch` → `simple_http_client.fetch`
+> 8. Go to **Settings** → **Devices & Services** → **Add Integration** → search for "Simple HTTP Client"
+> 9. Update all service calls: `simple_curl.fetch` → `simple_http_client.fetch`
 >
 > **For manual installation users:**
 > 1. Delete `custom_components/simple_curl/` folder
-> 1. Download upgraded integration in `custom_components/simple_curl/` folder
-> 2. In `configuration.yaml`: change `simple_curl:` to `simple_http_client:`
-> 3. Update all service calls: `simple_curl.fetch` → `simple_http_client.fetch`
+> 2. Download and extract to `custom_components/simple_http_client/`
+> 3. Remove from `configuration.yaml`: `simple_curl:` (if present)
 > 4. Restart Home Assistant
+> 5. Go to **Settings** → **Devices & Services** → **Add Integration** → search for "Simple HTTP Client"
+> 6. Update all service calls: `simple_curl.fetch` → `simple_http_client.fetch`
 
 A lightweight custom integration that provides a callable service to fetch URLs with custom HTTP methods and headers, returning the response as a variable for use in automations and scripts.
 

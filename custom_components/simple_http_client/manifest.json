@@ -2,7 +2,7 @@
   "domain": "simple_http_client",
   "name": "Simple HTTP Client",
   "codeowners": ["@storm1er"],
-  "config_flow": false,
+  "config_flow": true,
   "dependencies": [],
   "documentation": "https://github.com/storm1er/ha-simple-http-client",
   "integration_type": "service",

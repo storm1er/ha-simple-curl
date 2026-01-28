@@ -1,0 +1,13 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add Simple HTTP Client",
+        "description": "Simple HTTP Client provides a service to make HTTP requests from automations and scripts. No configuration is required."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Only a single instance is allowed."
+    }
+  }
+}

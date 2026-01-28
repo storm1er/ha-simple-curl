@@ -11,22 +11,23 @@
 > **If you're upgrading from version v1.0.0:**
 >
 > **For HACS users:**
-> 1. In `configuration.yaml`: remove `simple_curl:`
+> 1. Remove from `configuration.yaml`: `simple_curl:` (if present)
 > 2. Restart Home Assistant to disable the old integration
 > 3. In HACS → Integrations, find "Simple cURL" and remove it
-> 4. Remove old repo repository: `https://github.com/storm1er/ha-simple-curl`
-> 4. Add repository: `https://github.com/storm1er/ha-simple-http-client`
-> 5. Download "Simple HTTP Client"
-> 6. In `configuration.yaml`: add `simple_http_client:`
+> 4. Remove old repository: `https://github.com/storm1er/ha-simple-curl`
+> 5. Add repository: `https://github.com/storm1er/ha-simple-http-client`
+> 6. Download "Simple HTTP Client"
 > 7. Restart Home Assistant
-> 8. Update all service calls: `simple_curl.fetch` → `simple_http_client.fetch`
+> 8. Go to **Settings** → **Devices & Services** → **Add Integration** → search for "Simple HTTP Client"
+> 9. Update all service calls: `simple_curl.fetch` → `simple_http_client.fetch`
 >
 > **For manual installation users:**
 > 1. Delete `custom_components/simple_curl/` folder
-> 1. Download upgraded integration in `custom_components/simple_curl/` folder
-> 2. In `configuration.yaml`: change `simple_curl:` to `simple_http_client:`
-> 3. Update all service calls: `simple_curl.fetch` → `simple_http_client.fetch`
+> 2. Download and extract to `custom_components/simple_http_client/`
+> 3. Remove from `configuration.yaml`: `simple_curl:` (if present)
 > 4. Restart Home Assistant
+> 5. Go to **Settings** → **Devices & Services** → **Add Integration** → search for "Simple HTTP Client"
+> 6. Update all service calls: `simple_curl.fetch` → `simple_http_client.fetch`
 
 A lightweight Home Assistant integration that provides a simple service to fetch URLs with custom HTTP methods and headers. The response is returned as a variable that can be used directly in your automations and scripts.
 
@@ -52,31 +53,31 @@ Perfect for one-off API calls, webhooks, or dynamic URL fetching where you don't
 4. Select category: **Integration**
 5. Click **Add**
 6. Find "Simple HTTP Client" in HACS and click **Download**
-7. Add to your `configuration.yaml`:
-   ```yaml
-   simple_http_client:
-   ```
-8. Restart Home Assistant
+7. Restart Home Assistant
+8. Go to **Settings** → **Devices & Services**
+9. Click **Add Integration** (bottom right)
+10. Search for "Simple HTTP Client" and add it
 
 ### Manual Installation
 
 1. Download the latest release from the [releases page](https://github.com/storm1er/ha-simple-http-client/releases)
 2. Extract and copy the `custom_components/simple_http_client` folder to your Home Assistant `custom_components` directory
-3. Add to your `configuration.yaml`:
-   ```yaml
-   simple_http_client:
-   ```
-4. Restart Home Assistant
+3. Restart Home Assistant
+4. Go to **Settings** → **Devices & Services**
+5. Click **Add Integration** (bottom right)
+6. Search for "Simple HTTP Client" and add it
 
-**Note:** This integration must be added to `configuration.yaml` to load. It does not appear in **Settings** → **Devices & Services**.
+**Note:** No configuration.yaml entry is required. The integration is added through the UI.
 
 ### Verify Installation
 
-After restarting Home Assistant with `simple_http_client:` in your configuration.yaml:
+After adding the integration through the UI:
 
-1. Go to **Developer Tools** → **Services**
-2. Search for `simple_http_client.fetch`
-3. If the service appears, installation was successful!
+1. Go to **Settings** → **Devices & Services**
+2. Verify "Simple HTTP Client" appears in your integrations list
+3. Go to **Developer Tools** → **Services**
+4. Search for `simple_http_client.fetch`
+5. If the service appears, installation was successful!
 
 Alternatively, check the logs at **Settings** → **System** → **Logs** for:
 ```
@@ -268,18 +269,18 @@ script:
 
 ### Service not found
 
-If the `simple_http_client.fetch` service doesn't appear after restart:
+If the `simple_http_client.fetch` service doesn't appear:
 
-1. **Verify `configuration.yaml`**: Make sure you added `simple_http_client:` to your configuration.yaml file
-2. **Check YAML syntax**: Run **Developer Tools** → **YAML** → **Check Configuration** to ensure no YAML errors
-3. **Verify installation**: Confirm the integration is in `custom_components/simple_http_client/`
+1. **Verify integration is added**: Go to **Settings** → **Devices & Services** and check if "Simple HTTP Client" is listed
+2. **Add the integration**: If not listed, click **Add Integration** and search for "Simple HTTP Client"
+3. **Verify installation**: Confirm the integration files are in `custom_components/simple_http_client/`
 4. **Check logs**: Go to **Settings** → **System** → **Logs** and search for "simple_http_client" errors
-5. **Restart again**: Sometimes a second restart is needed
+5. **Restart Home Assistant**: Sometimes a restart is needed after adding the integration
 
 Common issues:
-- **Forgot to add to configuration.yaml** - This is the most common issue! The integration won't load without it.
-- **YAML indentation error** - Make sure `simple_http_client:` is at the root level (no indentation)
-- **Typo in domain name** - Must be exactly `simple_http_client:` (with underscore, not dash)
+- **Integration not added through UI** - Make sure to add it via **Settings** → **Devices & Services** → **Add Integration**
+- **Files not in correct location** - Must be in `custom_components/simple_http_client/`
+- **Cache issues** - Try clearing your browser cache and restarting Home Assistant
 
 ### Request fails with error
 
